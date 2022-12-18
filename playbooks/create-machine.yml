@@ -1,0 +1,9 @@
+---
+- name: Create machine in OCI
+  hosts: oci-bastion
+  gather_facts: false
+  tasks:
+    - name: Create machine
+      command: terraform plan
+      argv:
+        chdir: /home/ubuntu/git/ansible-oracle-packer/oci/terraform/dbfs

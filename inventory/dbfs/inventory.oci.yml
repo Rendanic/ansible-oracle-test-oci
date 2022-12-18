@@ -1,0 +1,34 @@
+---
+# dynamic Inventory with OCI
+
+plugin: oracle.oci.oci
+
+regions:
+  - eu-frankfurt-1
+
+enable_parallel_processing: yes
+
+# compartments:
+#   - compartment_ocid: ocid1.compartment.oc1..xxxxxx
+
+compose:
+  ansible_host: private_ip
+
+hostname_format_preferences:
+  - "display_name"
+
+groups:
+  bastion: "'ansible' == freeform_tags.bastion"
+  devsec: "'ansible' == freeform_tags.devsec"
+  dbfs: "'dbfs' == freeform_tags.ansible_oracle"
+
+fetch_compute_hosts: true
+fetch_db_hosts: false
+
+primary_vnic_only: true
+
+cache: true
+cache_plugin: jsonfile
+cache_timeout: 900
+cache_connection: /tmp/oci-cache
+cache_prefix: oci_

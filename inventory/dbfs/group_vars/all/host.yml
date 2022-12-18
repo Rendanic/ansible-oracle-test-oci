@@ -1,0 +1,34 @@
+---
+configure_public_yum_repo: false
+configure_motd: false
+
+configure_cluster: false
+role_separation: false
+configure_oracle_sudo: true
+
+# yamllint disable-line rule:var-naming
+disable_ee_options: true
+
+control_management_pack_access: NONE
+
+autostartup_service: true
+
+configure_hugepages_by: memory
+
+# disable hugepages on small systems
+# don't forget to enable use_large_pages in oracle parameter
+# size_in_gb_hugepages: 2
+size_in_gb_hugepages: 0
+
+oracle_stage: /u01/stage
+
+configure_host_disks: false
+
+host_fs_layout:
+  - vgname: vgora
+    state: present
+    filesystem:
+      - {mntp: /u01, lvname: lvorabase, lvsize: 25G, fstype: xfs}
+      - {mntp: /u02, lvname: lvoradata, lvsize: 25G, fstype: xfs, fsopts: "-m reflink=1 -m crc=1"}
+    disk:
+      - {device: /dev/sdb, pvname: /dev/sdb1}
