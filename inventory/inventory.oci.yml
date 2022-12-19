@@ -17,7 +17,7 @@ compose:
 hostname_format_preferences:
   - "display_name"
 
-exclude_host_filters:
+include_host_filters:
   # filter the hosts with freeform tag with key <tag_key> which has value <tag_value>
   - "'dbfs' == freeform_tags.ansible_oracle"
 
