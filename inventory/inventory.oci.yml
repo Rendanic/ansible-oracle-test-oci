@@ -17,10 +17,14 @@ compose:
 hostname_format_preferences:
   - "display_name"
 
+exclude_host_filters:
+  # filter the hosts with freeform tag with key <tag_key> which has value <tag_value>
+  - "'dbfs' == freeform_tags.ansible_oracle"
+
 groups:
-  bastion: "'ansible' == freeform_tags.bastion"
-  devsec: "'ansible' == freeform_tags.devsec"
-  dbfs: "'dbfs' == freeform_tags.ansible_oracle"
+  oci_bastion: "'ansible' == freeform_tags.bastion"
+  oci_devsec: "'ansible' == freeform_tags.devsec"
+  oci_dbfs: "'dbfs' == freeform_tags.ansible_oracle"
 
 fetch_compute_hosts: true
 fetch_db_hosts: false
