@@ -7,6 +7,6 @@ golden_image_dest: /u01/golden
 
 # usind NFS-Server
 install_from_nfs: true
-nfs_server_sw: ansible-oracle-bastion
+nfs_server_sw: 10.20.20.156
 nfs_server_sw_path: /sw/oracle
 oracle_stage_remote: /sw/oracle
