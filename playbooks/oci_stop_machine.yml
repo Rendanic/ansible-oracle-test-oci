@@ -3,6 +3,7 @@
 - name: Stop machines from hostgroup
   hosts: "oci_devsec"
   any_errors_fatal: true
+  ansible_connection: local
   tasks:
     - name: OCI Executions
       delegate_to: localhost
