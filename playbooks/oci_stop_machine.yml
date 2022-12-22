@@ -10,3 +10,8 @@
         - name: show id
           debug:
             var: id
+        
+        - name: Stop machine
+          oracle.oci.oci_compute_instance_actions:
+            instance_id: "{{ id }}"
+            action: stop
