@@ -3,8 +3,10 @@
 - name: Stop machines from hostgroup
   hosts: "oci_devsec"
   any_errors_fatal: true
-  delegate_to: localhost
   tasks:
-    - name: show id
-      debug:
-        var: id
+    - name: OCI Executions
+      delegate_to: localhost
+      block:
+        - name: show id
+          debug:
+            var: id
