@@ -6,7 +6,6 @@
   tasks:
     - name: OCI Executions
       delegate_to: localhost
-      ansible_connection: local
       block:
         - name: show id
           debug:
