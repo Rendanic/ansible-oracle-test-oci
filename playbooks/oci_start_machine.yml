@@ -1,12 +1,13 @@
 ---
 
-- name: Stop machines from hostgroup
+- name: Start machines from hostgroup
   hosts: "{{ hostgroup | mandatory }}"
   gather_facts: false
   any_errors_fatal: true
   tasks:
-    - name: Stop machine
+  tasks:
+    - name: Start machine
       oracle.oci.oci_compute_instance_actions:
         instance_id: "{{ id }}"
-        action: stop
+        action: start
       delegate_to: localhost
