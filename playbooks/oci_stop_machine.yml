@@ -2,6 +2,7 @@
 
 - name: Stop machines from hostgroup
   hosts: "oci_devsec"
+  gather_facts: false
   any_errors_fatal: true
   tasks:
     - name: OCI Executions
