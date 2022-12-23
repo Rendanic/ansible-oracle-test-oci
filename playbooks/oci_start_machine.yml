@@ -5,6 +5,15 @@
   gather_facts: false
   any_errors_fatal: true
   tasks:
+    - name: Instance Information
+      ansible.builtin.debug:
+        msg:
+          - "id             : {{ id }}"
+          - "private_ip     : {{ private_ip }}"
+          - "public_ip      : {{ public_ip | default('none') }}"
+          - "lifecycle_state: {{ lifecycle_state }}"
+          - "time_created   :{{ time_created  }}"
+
     - name: Start machine
       oracle.oci.oci_compute_instance_actions:
         instance_id: "{{ id }}"
