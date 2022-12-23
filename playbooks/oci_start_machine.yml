@@ -8,11 +8,10 @@
     - name: Instance Information
       ansible.builtin.debug:
         msg:
-          - "id             : {{ id }}"
-          - "private_ip     : {{ private_ip }}"
-          - "public_ip      : {{ public_ip | default('none') }}"
-          - "lifecycle_state: {{ lifecycle_state }}"
-          - "time_created   :{{ time_created  }}"
+          - "id          : {{ id }}"
+          - "private_ip  : {{ private_ip }}"
+          - "public_ip   : {{ public_ip | default('none') }}"
+          - "time_created: {{ time_created  }}"
 
     - name: Start machine
       oracle.oci.oci_compute_instance_actions:
