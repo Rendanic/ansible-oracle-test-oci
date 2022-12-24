@@ -19,17 +19,27 @@
       memory_in_gbs: 1
       baseline_ocpu_utilization: BASELINE_1_8
     ssh_authorized_keys: "{{ lookup('ansible.builtin.env', 'PUBLIC_USER_KEYS') }}"
+    freeform_tags:
+      ansible_oracle: dbfs
+      devsec: ansible
 
   tasks:
     - name: Terminate existing machine
-      oracle.oci.oci_compute_instance:
-        compartment_id: "{{ instance_compartment }}"
-        display_name: "{{ instance_hostname | mandatory }}"
-        state: absent
-        wait: true
-      delegate_to: localhost
       when:
         instance_replace | default(false)
+      block:
+        - name: Terminate existing machine
+          ansible.builtin.debug:
+            msg: "Terminate machine {{ instance_hostname }}" 
+          delegate_to: localhost
+
+        - name: Terminate existing machine
+          oracle.oci.oci_compute_instance:
+            compartment_id: "{{ instance_compartment }}"
+            display_name: "{{ instance_hostname | mandatory }}"
+            state: absent
+            wait: true
+          delegate_to: localhost
 
     - name: Launch instance
       oracle.oci.oci_compute_instance:
@@ -47,7 +57,7 @@
             hostname_label: "{{ instance_hostname }}"
             subnet_id: "{{ instance_subnet_id }}"
           # defined_tags:
-          # freeform_tags:
+             freeform_tags: "{{ freeform_tags }}"
         metadata:
           ssh_authorized_keys: "{{ ssh_authorized_keys }}"
       register: result
@@ -59,8 +69,6 @@
       when:
         - result.instance is defined
       delegate_to: localhost
-    # - set_fact:
-    #     instance_id: "{{result.instance.id }}"
 
     - name: Start machine when not recreated
       oracle.oci.oci_compute_instance_actions:
