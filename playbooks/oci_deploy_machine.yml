@@ -10,6 +10,7 @@
     instance_subnet_id: ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaag2wmn7xfyw23tin5x43oovqevwf6updw5ddm3ogmzmvaihksmiqq
     instance_image: ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa4qgh74csl6sentnhk4wq32cjeqsqpejwyyfvg2ikr44w7gbmomwa
     instance_hostname: ansible-oracle-test
+    boot_volume_size: 80
     instance_shape:  "VM.Standard.E4.Flex"
     instance_shape_config:
       ocpus: 1
@@ -30,8 +31,8 @@
         availability_domain: "{{ instance_ad }}"
         compartment_id: "{{ instance_compartment }}"
         display_name: "{{ instance_hostname }}"
-        # boot_volume_size_in_gbs: 80
         source_details:
+          boot_volume_size_in_gbs: "{{ boot_volume_size }}"
           source_type: image
           image_id: "{{ instance_image }}"
         shape: "{{ instance_shape }}"
@@ -52,6 +53,6 @@
         var: result.instance
       when:
         - result.instance is defined
+      delegate_to: localhost
     # - set_fact:
     #     instance_id: "{{result.instance.id }}"
-      delegate_to: localhost
