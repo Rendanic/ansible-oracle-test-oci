@@ -59,3 +59,11 @@
       delegate_to: localhost
     # - set_fact:
     #     instance_id: "{{result.instance.id }}"
+
+    - name: Start machine when not recreated
+      oracle.oci.oci_compute_instance_actions:
+        display_name: "{{ instance_hostname | mandatory }}"
+        action: start
+      delegate_to: localhost
+      when:
+        not instance_replace | default(false)
