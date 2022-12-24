@@ -20,6 +20,8 @@
       baseline_ocpu_utilization: BASELINE_1_8
 
   tasks:
+    - debug: var=instance_ad
+    - fail:
     - name: Terminate existing machine
       oracle.oci.oci_compute_instance:
         compartment_id: "{{ instance_compartment }}"
