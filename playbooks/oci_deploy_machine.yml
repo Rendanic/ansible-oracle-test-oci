@@ -9,8 +9,8 @@
     instance_compartment: ocid1.compartment.oc1..aaaaaaaaye3pks3l3v5sdl265sj5yuag2pmx4r6pvkzkv7voclmtdcbjzozq
     instance_subnet_id: ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaag2wmn7xfyw23tin5x43oovqevwf6updw5ddm3ogmzmvaihksmiqq
     instance_image: ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa4qgh74csl6sentnhk4wq32cjeqsqpejwyyfvg2ikr44w7gbmomwa
-    instance_shape:  "VM.Standard.E4.Flex"
     instance_hostname: ansible-oracle-test
+    instance_shape:  "VM.Standard.E4.Flex"
 
   tasks:
     - name: Launch instance
@@ -22,6 +22,9 @@
           source_type: image
           image_id: "{{ instance_image }}"
         shape: "{{ instance_shape }}"
+        shape_config:
+          memory_in_gbs: 1
+          baseline_ocpu_utilization: BASELINE_1_8
         create_vnic_details:
             assign_public_ip: True
             hostname_label: "{{ instance_hostname }}"
