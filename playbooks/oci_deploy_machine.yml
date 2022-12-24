@@ -30,7 +30,7 @@
         availability_domain: "{{ instance_ad }}"
         compartment_id: "{{ instance_compartment }}"
         display_name: "{{ instance_hostname }}"
-        boot_volume_size_in_gbs: 80
+        # boot_volume_size_in_gbs: 80
         source_details:
           source_type: image
           image_id: "{{ instance_image }}"
