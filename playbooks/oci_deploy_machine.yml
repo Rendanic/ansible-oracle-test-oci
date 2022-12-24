@@ -1,7 +1,7 @@
 ---
 
 - name: Deploy machines
-  hosts: "{{ hostgroup | mandatory }}"
+  hosts: "{{ hostgroup | default('localhost') }}"
   gather_facts: false
   any_errors_fatal: true
   vars:
@@ -22,10 +22,12 @@
     - name: Terminate existing machine
       oracle.oci.oci_compute_instance:
         compartment_id: "{{ instance_compartment }}"
-        display_name: "{{ instance_hostname }}"
+        display_name: "{{ instance_hostname | mandatory }}"
         state: absent
         wait: true
       delegate_to: localhost
+      when:
+        instance_replace | default(false)
 
     - name: Launch instance
       oracle.oci.oci_compute_instance:
