@@ -46,6 +46,7 @@
         availability_domain: "{{ instance_ad }}"
         compartment_id: "{{ instance_compartment }}"
         display_name: "{{ instance_hostname }}"
+        wait: True
         source_details:
           boot_volume_size_in_gbs: "{{ boot_volume_size }}"
           source_type: image
