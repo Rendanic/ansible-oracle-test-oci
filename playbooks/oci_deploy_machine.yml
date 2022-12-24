@@ -36,7 +36,9 @@
       register: result
 
     - name: Print instance details
-      debug:
+      ansible.builtin.debug:
         var: result.instance
+      when:
+        - result.instance is defined
     # - set_fact:
     #     instance_id: "{{result.instance.id }}"
