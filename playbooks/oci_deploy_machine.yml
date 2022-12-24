@@ -23,6 +23,7 @@
           image_id: "{{ instance_image }}"
         shape: "{{ instance_shape }}"
         shape_config:
+          ocpus: 1
           memory_in_gbs: 1
           baseline_ocpu_utilization: BASELINE_1_8
         create_vnic_details:
