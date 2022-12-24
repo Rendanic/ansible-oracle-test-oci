@@ -20,7 +20,7 @@
     - name: Terminate existing machine
       oracle.oci.oci_compute_instance:
         compartment_id: "{{ instance_compartment }}"
-        name: "{{ instance_hostname }}"
+        display_name: "{{ instance_hostname }}"
         state: absent
         wait: true
       delegate_to: localhost
@@ -29,7 +29,7 @@
       oracle.oci.oci_compute_instance:
         availability_domain: "{{ instance_ad }}"
         compartment_id: "{{ instance_compartment }}"
-        name: "{{ instance_hostname }}"
+        display_name: "{{ instance_hostname }}"
         boot_volume_size_in_gbs: 80
         source_details:
           source_type: image
