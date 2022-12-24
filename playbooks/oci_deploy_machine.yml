@@ -11,6 +11,10 @@
     instance_image: ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa4qgh74csl6sentnhk4wq32cjeqsqpejwyyfvg2ikr44w7gbmomwa
     instance_hostname: ansible-oracle-test
     instance_shape:  "VM.Standard.E4.Flex"
+    instance_shape_config:
+      ocpus: 1
+      memory_in_gbs: 1
+      baseline_ocpu_utilization: BASELINE_1_8
 
   tasks:
     - name: Launch instance
@@ -22,10 +26,7 @@
           source_type: image
           image_id: "{{ instance_image }}"
         shape: "{{ instance_shape }}"
-        shape_config:
-          ocpus: 1
-          memory_in_gbs: 1
-          baseline_ocpu_utilization: BASELINE_1_8
+        shape_config: "{{ instance_shape_config }}"
         create_vnic_details:
             assign_public_ip: True
             hostname_label: "{{ instance_hostname }}"
@@ -36,6 +37,6 @@
 
     - name: Print instance details
       debug:
-        msg: "Launched a new instance {{ result }}"
-    - set_fact:
-        instance_id: "{{result.instance.id }}"
+        var: result.instance
+    # - set_fact:
+    #     instance_id: "{{result.instance.id }}"
