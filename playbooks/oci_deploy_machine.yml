@@ -18,6 +18,7 @@
       ocpus: 1
       memory_in_gbs: 1
       baseline_ocpu_utilization: BASELINE_1_8
+    ssh_authorized_keys: "{{ lookup('ansible.builtin.env', 'PUBLIC_USER_KEYS') }}"
 
   tasks:
     - name: Terminate existing machine
@@ -47,8 +48,8 @@
             subnet_id: "{{ instance_subnet_id }}"
           # defined_tags:
           # freeform_tags:
-        # metadata:
-        #     ssh_authorized_keys: "{{ lookup('file',  my_test_public_key ) }}"
+        metadata:
+          ssh_authorized_keys: "{{ ssh_authorized_keys }}"
       register: result
       delegate_to: localhost
 
