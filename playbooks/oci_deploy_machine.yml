@@ -54,11 +54,11 @@
         shape: "{{ instance_shape }}"
         shape_config: "{{ instance_shape_config }}"
         create_vnic_details:
-            assign_public_ip: True
-            hostname_label: "{{ instance_hostname }}"
-            subnet_id: "{{ instance_subnet_id }}"
+          assign_public_ip: True
+          hostname_label: "{{ instance_hostname }}"
+          subnet_id: "{{ instance_subnet_id }}"
           # defined_tags:
-            freeform_tags: "{{ freeform_tags }}"
+        freeform_tags: "{{ freeform_tags }}"
         metadata:
           ssh_authorized_keys: "{{ ssh_authorized_keys }}"
       register: result
