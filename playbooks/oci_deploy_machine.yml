@@ -64,19 +64,20 @@
         freeform_tags: "{{ freeform_tags }}"
         metadata:
           ssh_authorized_keys: "{{ ssh_authorized_keys }}"
-      register: result
+      register: result_instance
       delegate_to: localhost
 
     - name: Print instance details
       ansible.builtin.debug:
-        var: result.instance
+        var: result_instance.instance
       when:
-        - result.instance is defined
+        - result_instance.instance is defined
       delegate_to: localhost
 
     - name: Manage Block Devices
       when:
         - block_volumes is defined
+        - result_instance.instance is defined
       block:
         - name: Create a volume
           oracle.oci.oci_blockstorage_volume:
@@ -100,7 +101,7 @@
 
         - name: Attach volume to instance
           oracle.oci.oci_compute_volume_attachment:
-            instance_id: "{{ instance_id }}"
+            instance_id: "{{ result_instance.instance.id }}"
             type: paravirtualized
             volume_id: "{{ result.results[ansible_loop.index0].volume.id }}"
             compartment_id: "{{ instance_compartment }}"
