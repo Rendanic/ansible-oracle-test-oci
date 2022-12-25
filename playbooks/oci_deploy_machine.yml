@@ -87,6 +87,8 @@
           register: result
           with_items:
             - "{{ block_volumes }}"
+          loop_control:
+            extended: true
 
         - name: Print volume details
           debug:
@@ -95,19 +97,17 @@
             - "{{ block_volumes }}"
           loop_control:
             extended: true
-            extended_allitems: false
 
         - name: Attach volume to instance
           oracle.oci.oci_compute_volume_attachment:
             instance_id: "{{ instance_id }}"
             type: paravirtualized
-            volume_id: "{{ result.volume.id }}"
+            volume_id: "{{ result.results[ansible_loop.index0].volume.id }}"
             compartment_id: "{{ instance_compartment }}"
           with_items:
             - "{{ block_volumes }}"
           loop_control:
             extended: true
-            extended_allitems: false
 
     - name: Start machine when not recreated
       oracle.oci.oci_compute_instance_actions:
