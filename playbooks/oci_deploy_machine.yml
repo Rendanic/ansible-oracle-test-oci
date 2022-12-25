@@ -63,7 +63,7 @@
           loop_control:
             extended: true
           when:
-            - inst_block_volumes.volumesis defined
+            - inst_block_volumes.volumes is defined
             - item.display_name is defined
             - item.display_name is regex_search("^{{ instance_hostname }}  (.*)")
 
