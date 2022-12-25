@@ -1,0 +1,11 @@
+---
+# THis Playbook is temporary until user_data has been fixed
+
+- name: Host configuration for OCI
+  hosts: "{{ hostgroup | default('all') }}"
+  become: true
+  become_user: root
+  any_errors_fatal: true
+  tasks:
+    - name: growpart
+      ansible.builtin.command: growpart /dev/sda 2
