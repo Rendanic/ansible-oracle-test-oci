@@ -83,7 +83,7 @@
           oracle.oci.oci_blockstorage_volume:
             availability_domain: "{{ instance_ad }}"
             compartment_id: "{{ instance_compartment }}"
-            name: "{{ item.name }}"
+            name: "{{ instance_hostname }} {{ item.name }}"
             size_in_gbs: "{{ item.size }}"
           register: result
           with_items:
@@ -109,6 +109,8 @@
             - "{{ block_volumes }}"
           loop_control:
             extended: true
+          # when:
+
 
     - name: Start machine when not recreated
       oracle.oci.oci_compute_instance_actions:
