@@ -65,7 +65,7 @@
           when:
             - inst_block_volumes.volumes is defined
             - item.display_name is defined
-            - item.display_name | regex_search("^{{ instance_hostname }}  (.*)")
+            - item.display_name | regex_search("^" + instance_hostname + " (.*)")
 
     - fail:
     - name: Launch instance
