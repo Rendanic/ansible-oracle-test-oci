@@ -50,10 +50,7 @@
             lifecycle_state: AVAILABLE
           register: inst_block_volumes
 
-        - debug:
-            var: inst_block_volumes
-
-        - name: Terminate Block volume
+        - name: Terminate Block volumes
           oracle.oci.oci_blockstorage_volume:
             compartment_id: "{{ instance_compartment }}"
             volume_id: "{{ item.id }}"
@@ -67,7 +64,6 @@
             - item.display_name is defined
             - item.display_name | regex_search("^" + instance_hostname + " (.*)")
 
-    - fail:
     - name: Launch instance
       oracle.oci.oci_compute_instance:
         availability_domain: "{{ instance_ad }}"
