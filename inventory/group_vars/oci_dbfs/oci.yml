@@ -1,0 +1,9 @@
+---
+hostgroup: oci_dbfs
+
+boot_volume_size: 80
+
+instance_shape_config:
+  ocpus: 1
+  memory_in_gbs: 4
+  baseline_ocpu_utilization: BASELINE_1_1
