@@ -111,7 +111,6 @@
             extended: true
           # when:
 
-
     - name: Start machine when not recreated
       oracle.oci.oci_compute_instance_actions:
         instance_id: "{{ result_instance.instance.id }}"
