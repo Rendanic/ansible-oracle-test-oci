@@ -47,6 +47,7 @@
         - name: Get List of Block Volumes
           oracle.oci.oci_blockstorage_volume_facts:
             compartment_id: "{{ instance_compartment }}"
+            lifecycle_state: AVAILABLE
           register: inst_block_volumes
 
         - debug:
