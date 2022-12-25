@@ -4,6 +4,8 @@
   hosts: "{{ hostgroup | mandatory }}"
   gather_facts: false
   any_errors_fatal: true
+  vars:
+    ansible_connection: local
   tasks:
     - name: Instance Information
       ansible.builtin.debug:
