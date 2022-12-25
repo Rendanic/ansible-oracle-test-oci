@@ -29,3 +29,5 @@ sqlnet_config:
   sqlnetalias1:
     - {name: "ADR_BASE", value: "/u01/app/oracle/"}
     - {name: "SQLNET.ALLOWED_LOGON_VERSION_CLIENT", value: 12}
+
+tnsnames_installed: []
