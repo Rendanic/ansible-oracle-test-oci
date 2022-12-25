@@ -114,7 +114,7 @@
 
     - name: Start machine when not recreated
       oracle.oci.oci_compute_instance_actions:
-        instance_id: "{{ result.instance.id }}"
+        instance_id: "{{ result_instance.instance.id }}"
         action: start
       delegate_to: localhost
       when:
