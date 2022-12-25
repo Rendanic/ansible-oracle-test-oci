@@ -44,6 +44,15 @@
             wait: true
           delegate_to: localhost
 
+        - name: Get List of Block Volumes
+          oracle.oci.oci_blockstorage_volume_facts:
+            compartment_id: "{{ instance_compartment }}"
+          register: inst_block_volumes
+
+        - debug:
+            var: inst_block_volumes
+
+    - fail:
     - name: Launch instance
       oracle.oci.oci_compute_instance:
         availability_domain: "{{ instance_ad }}"
