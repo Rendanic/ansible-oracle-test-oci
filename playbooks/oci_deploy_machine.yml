@@ -77,8 +77,6 @@
     - name: Manage Block Devices
       when:
         - block_volumes is defined
-      with_items:
-        - "{{ block_volumes }}"
       block:
         - name: Create a volume
           oci_blockstorage_volume:
@@ -87,6 +85,8 @@
             name: "{{ item.name }}"
             size_in_gbs: "{{ item.size }}"
           register: result
+          with_items:
+            - "{{ block_volumes }}"
 
         - name: Print volume details
           debug:
@@ -99,6 +99,8 @@
             volume_id: "{{ result.volume.id }}"
             compartment_id: "{{ instance_compartment }}"
           register: result
+          with_items:
+            - "{{ block_volumes }}"
 
         - name: Print volume attachment details
           debug:
