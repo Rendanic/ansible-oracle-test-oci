@@ -1,6 +1,6 @@
 ---
 hostgroup: oci_dbfs
-instance_hostname: "{{ ansible_host }}"
+instance_hostname: ansible-oracle-dbfs-ol7
 
 instance_freeform_tags:
   ansible_oracle: dbfs
