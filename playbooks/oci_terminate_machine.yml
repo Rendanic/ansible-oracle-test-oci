@@ -1,0 +1,40 @@
+---
+- name: Terminate machines
+  hosts: all
+  gather_facts: false
+  any_errors_fatal: true
+  vars:
+    ansible_connection: local
+  tasks:
+    - name: Terminate existing machine
+      ansible.builtin.debug:
+        msg: "Terminate machine {{ instance_hostname }}" 
+      delegate_to: localhost
+
+    - name: Terminate existing machine
+      oracle.oci.oci_compute_instance:
+        compartment_id: "{{ instance_compartment | mandatory }}"
+        display_name: "{{ instance_hostname | mandatory }}"
+        state: absent
+        wait: true
+      delegate_to: localhost
+
+    - name: Get List of Block Volumes
+      oracle.oci.oci_blockstorage_volume_facts:
+        compartment_id: "{{ instance_compartment }}"
+        lifecycle_state: AVAILABLE
+      register: inst_block_volumes
+
+    - name: Terminate Block volumes
+      oracle.oci.oci_blockstorage_volume:
+        compartment_id: "{{ instance_compartment }}"
+        volume_id: "{{ item.id }}"
+        state: absent
+      with_items:
+        - "{{ inst_block_volumes.volumes }}"
+      loop_control:
+        extended: true
+      when:
+        - inst_block_volumes.volumes is defined
+        - item.display_name is defined
+        - item.display_name | regex_search("^" + instance_hostname + " (.*)")
