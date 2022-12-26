@@ -14,7 +14,7 @@
     - name: Terminate existing machine
       oracle.oci.oci_compute_instance:
         compartment_id: "{{ instance_compartment | mandatory }}"
-        display_name: "{{ instance_hostname | mandatory }}"
+        display_name: "{{ ansible_host }}"
         state: absent
         wait: true
       delegate_to: localhost
@@ -37,4 +37,4 @@
       when:
         - inst_block_volumes.volumes is defined
         - item.display_name is defined
-        - item.display_name | regex_search("^" + instance_hostname + " (.*)")
+        - item.display_name | regex_search("^" + ansible_host + " (.*)")
