@@ -1,7 +1,7 @@
 ---
 
 - name: Deploy machines
-  hosts: all
+  hosts: oci
   gather_facts: false
   any_errors_fatal: true
   vars:
