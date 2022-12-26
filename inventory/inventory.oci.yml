@@ -25,6 +25,7 @@ groups:
   oci_bastion: "'ansible' == freeform_tags.bastion"
   oci_devsec: "'ansible' == freeform_tags.devsec"
   oci_dbfs: "'dbfs' == freeform_tags.ansible_oracle"
+  oci_has: "'has' == freeform_tags.ansible_oracle"
 
 fetch_compute_hosts: true
 fetch_db_hosts: false
