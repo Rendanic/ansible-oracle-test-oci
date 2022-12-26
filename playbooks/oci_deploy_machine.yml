@@ -44,6 +44,7 @@
             compartment_id: "{{ instance_compartment }}"
             lifecycle_state: AVAILABLE
           register: inst_block_volumes
+          delegate_to: localhost
 
         - name: Terminate Block volumes
           oracle.oci.oci_blockstorage_volume:
@@ -58,6 +59,7 @@
             - inst_block_volumes.volumes is defined
             - item.display_name is defined
             - item.display_name | regex_search("^" + instance_hostname + " (.*)")
+          delegate_to: localhost
 
     - name: Launch instance
       oracle.oci.oci_compute_instance:
@@ -104,6 +106,7 @@
             - "{{ block_volumes }}"
           loop_control:
             extended: true
+          delegate_to: localhost
 
         - name: Print volume details
           debug:
@@ -112,6 +115,7 @@
             - "{{ block_volumes }}"
           loop_control:
             extended: true
+          delegate_to: localhost
 
         - name: Attach volume to instance
           oracle.oci.oci_compute_volume_attachment:
@@ -123,6 +127,7 @@
             - "{{ block_volumes }}"
           loop_control:
             extended: true
+          delegate_to: localhost
 
     - name: Start machine when not recreated
       oracle.oci.oci_compute_instance_actions:
