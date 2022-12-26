@@ -7,16 +7,20 @@
   vars:
     ansible_connection: local
   tasks:
-    - name: Instance Information
-      ansible.builtin.debug:
-        msg:
-          - "id          : {{ id }}"
-          - "private_ip  : {{ private_ip }}"
-          - "public_ip   : {{ public_ip | default('none') }}"
-          - "time_created: {{ time_created  }}"
+    - name: Instance
+      when:
+        - id is defined
+      block:
+        - name: Instance Information
+          ansible.builtin.debug:
+            msg:
+              - "id          : {{ id }}"
+              - "private_ip  : {{ private_ip }}"
+              - "public_ip   : {{ public_ip | default('none') }}"
+              - "time_created: {{ time_created  }}"
 
-    - name: Stop machine
-      oracle.oci.oci_compute_instance_actions:
-        instance_id: "{{ id }}"
-        action: stop
-      delegate_to: localhost
+        - name: Stop machine
+          oracle.oci.oci_compute_instance_actions:
+            instance_id: "{{ id }}"
+            action: stop
+          delegate_to: localhost
