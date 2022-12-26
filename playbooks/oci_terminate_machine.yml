@@ -5,6 +5,7 @@
   any_errors_fatal: true
   vars:
     ansible_connection: local
+    instance_compartment: "{{ lookup('ansible.builtin.env', 'COMPARTMENT') }}"
   tasks:
     - name: Terminate existing machine
       ansible.builtin.debug:
