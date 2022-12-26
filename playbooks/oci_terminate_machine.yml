@@ -9,13 +9,13 @@
   tasks:
     - name: Terminate existing machine
       ansible.builtin.debug:
-        msg: "Terminate machine {{ ansible_host }}" 
+        msg: "Terminate machine {{ instance_hostname | mandatory }}" 
       delegate_to: localhost
 
     - name: Terminate existing machine
       oracle.oci.oci_compute_instance:
         compartment_id: "{{ instance_compartment | mandatory }}"
-        display_name: "{{ ansible_host }}"
+        display_name: "{{ instance_hostname }}"
         state: absent
         wait: true
       delegate_to: localhost
@@ -39,5 +39,5 @@
       when:
         - inst_block_volumes.volumes is defined
         - item.display_name is defined
-        - item.display_name | regex_search("^" + ansible_host + " (.*)")
+        - item.display_name | regex_search("^" + instance_hostname + " (.*)")
       delegate_to: localhost
