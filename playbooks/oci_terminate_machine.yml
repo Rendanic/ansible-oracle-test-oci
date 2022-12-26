@@ -8,7 +8,7 @@
   tasks:
     - name: Terminate existing machine
       ansible.builtin.debug:
-        msg: "Terminate machine {{ instance_hostname }}" 
+        msg: "Terminate machine {{ ansible_host }}" 
       delegate_to: localhost
 
     - name: Terminate existing machine
