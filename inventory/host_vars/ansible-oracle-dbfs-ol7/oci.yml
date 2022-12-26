@@ -3,6 +3,7 @@ hostgroup: oci_dbfs
 instance_hostname: ansible-oracle-dbfs-ol7
 
 instance_freeform_tags:
+  ansible_oracle_vm: oci
   ansible_oracle: dbfs
   devsec: ansible
 

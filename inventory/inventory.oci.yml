@@ -19,7 +19,7 @@ hostname_format_preferences:
 
 include_host_filters:
   # filter the hosts with freeform tag with key <tag_key> which has value <tag_value>
-  - "'dbfs' == freeform_tags.ansible_oracle"
+  - "'oci' == freeform_tags.ansible_oracle_vm"
 
 groups:
   oci_bastion: "'ansible' == freeform_tags.bastion"
