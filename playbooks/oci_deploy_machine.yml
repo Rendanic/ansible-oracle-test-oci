@@ -6,22 +6,17 @@
   any_errors_fatal: true
   vars:
     ansible_connection: local
-    # instance_hostname: ansible-oracle-test
     instance_ad: "{{ lookup('ansible.builtin.env', 'AVAILABILITY_DOMAIN') }}"
-    # DCSu:EU-FRANKFURT-1-AD-1
     instance_compartment: "{{ lookup('ansible.builtin.env', 'COMPARTMENT') }}"
     instance_subnet_id: "{{ lookup('ansible.builtin.env', 'INSTANCE_SUBNET_ID') }}"
-    instance_image: ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa4qgh74csl6sentnhk4wq32cjeqsqpejwyyfvg2ikr44w7gbmomwa
-    boot_volume_size: 80
-    instance_shape:  "VM.Standard.E4.Flex"
-    instance_shape_config:
-      ocpus: 1
-      memory_in_gbs: 1
-      baseline_ocpu_utilization: BASELINE_1_8
+    # instance_image: ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa4qgh74csl6sentnhk4wq32cjeqsqpejwyyfvg2ikr44w7gbmomwa
+    # boot_volume_size: 80
+    # instance_shape:  "VM.Standard.E4.Flex"
+    # instance_shape_config:
+    #   ocpus: 1
+    #   memory_in_gbs: 1
+    #   baseline_ocpu_utilization: BASELINE_1_8
     ssh_authorized_keys: "{{ lookup('ansible.builtin.env', 'PUBLIC_USER_KEYS') }}"
-    freeform_tags:
-      ansible_oracle: dbfs
-      devsec: ansible
 
     # block_volumes:
     #   - name: ASM
@@ -69,9 +64,9 @@
         availability_domain: "{{ instance_ad }}"
         compartment_id: "{{ instance_compartment }}"
         display_name: "{{ instance_hostname }}"
-        wait: True
+        wait: true
         source_details:
-          boot_volume_size_in_gbs: "{{ boot_volume_size }}"
+          boot_volume_size_in_gbs: "{{ boot_volume_size | default(omit) }}"
           source_type: image
           image_id: "{{ instance_image }}"
         shape: "{{ instance_shape }}"
@@ -80,8 +75,7 @@
           assign_public_ip: True
           hostname_label: "{{ instance_hostname }}"
           subnet_id: "{{ instance_subnet_id }}"
-          # defined_tags:
-        freeform_tags: "{{ freeform_tags }}"
+        freeform_tags: "{{ instance_freeform_tags | default(omit) }}"
         metadata:
           ssh_authorized_keys: "{{ ssh_authorized_keys }}"
       register: result_instance
@@ -129,7 +123,6 @@
             - "{{ block_volumes }}"
           loop_control:
             extended: true
-          # when:
 
     - name: Start machine when not recreated
       oracle.oci.oci_compute_instance_actions:

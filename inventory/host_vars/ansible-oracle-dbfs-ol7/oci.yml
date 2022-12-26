@@ -1,8 +1,15 @@
 ---
 hostgroup: oci_dbfs
+instance_hostname: "{{ ansible_host }}"
+
+instance_freeform_tags:
+  ansible_oracle: dbfs
+  devsec: ansible
 
 boot_volume_size: 80
 
+instance_image: ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa4qgh74csl6sentnhk4wq32cjeqsqpejwyyfvg2ikr44w7gbmomwa
+instance_shape:  "VM.Standard.E4.Flex"
 instance_shape_config:
   ocpus: 1
   memory_in_gbs: 4
