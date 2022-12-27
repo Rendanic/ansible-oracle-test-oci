@@ -3,6 +3,7 @@ hostgroup: oci_has
 instance_hostname: ansible-oracle-has19-ol7
 
 instance_freeform_tags:
+  ansible_oracle_vm: oci
   ansible_oracle: has
   devsec: ansible
 
@@ -12,5 +13,5 @@ instance_image: ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa4qgh74csl6sentnhk4wq32cje
 instance_shape:  "VM.Standard.E4.Flex"
 instance_shape_config:
   ocpus: 1
-  memory_in_gbs: 4
+  memory_in_gbs: 6
   baseline_ocpu_utilization: BASELINE_1_1
