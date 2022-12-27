@@ -15,3 +15,7 @@ instance_shape_config:
   ocpus: 1
   memory_in_gbs: 6
   baseline_ocpu_utilization: BASELINE_1_1
+
+block_volumes:
+  - name: ASM_DATA_FRA
+    size: 50

@@ -22,7 +22,6 @@
         number: "{{ item.number }}"
         part_end: "{{ item.size }}"
         state: present
-        # fs_type: ext4
       with_items:
         - number: 1
           size: 20GiB
