@@ -29,6 +29,21 @@ gi_patches_config:
             - 33271793  # OCW Release Update 21.4.0.0.211019
             - 33239276  # Database Release Update 21.4.0.0.211019
 
+  19.17.0.0.221018:
+    19.3.0.0:  # Base Release
+      opatch_minversion: 12.2.0.1.32
+      opatchauto:
+        - patchid: 34416665
+          patchversion: 19.17.0.0.221018
+          state: present
+          path: ./19.17.0.0.221018/gi/34416665/34416665
+          subpatches:
+            - 34444834  # OCW Release Update 19.17.0.0.221018
+            - 33575402  # DBWLM Release Update
+            - 34428761  # ACFS Release Update 19.17.0.0.221018
+            - 34580338  # TOMCAT RELEASE UPDATE 19.0.0.0.0
+            - 34419443  # Database Release Update 19.17.0.0.221018
+
   19.16.0.0.220719:
     19.3.0.0:  # Base Release
       opatch_minversion: 12.2.0.1.30
