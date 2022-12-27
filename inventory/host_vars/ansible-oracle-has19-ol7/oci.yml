@@ -13,7 +13,7 @@ instance_image: ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa4qgh74csl6sentnhk4wq32cje
 instance_shape:  "VM.Standard.E4.Flex"
 instance_shape_config:
   ocpus: 1
-  memory_in_gbs: 8
+  memory_in_gbs: 9
   baseline_ocpu_utilization: BASELINE_1_1
 
 block_volumes:
