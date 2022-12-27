@@ -17,5 +17,7 @@ instance_shape_config:
   baseline_ocpu_utilization: BASELINE_1_1
 
 block_volumes:
-  - name: ASM_DATA_FRA
+  - name: ASM_DATA01
+    size: 50
+  - name: ASM_FRA01
     size: 50
