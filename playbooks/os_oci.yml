@@ -14,21 +14,21 @@
     - name: pv
       ansible.builtin.command: pvresize /dev/sda2
 
-    # Block Volume size is 50GB in OCI
-    # => split Block Volume in partitions for ASM-Disks to safe storage
-    - name: Create partitions for ASM-Disks
-      community.general.parted:
-        device: /dev/sdb
-        number: "{{ item.number }}"
-        part_start: "{{ item.part_start }}"
-        part_end: "{{ item.part_end }}"
-        state: present
-      with_items:
-        - number: 1
-          part_start: 0%
-          part_end: 20GiB
-        - number: 2
-          part_start: 20GiB
-          part_end: 45GiB
-      when:
-        - ansible_devices.sdb is defined
+    # # Block Volume size is 50GB in OCI
+    # # => split Block Volume in partitions for ASM-Disks to safe storage
+    # - name: Create partitions for ASM-Disks
+    #   community.general.parted:
+    #     device: /dev/sdb
+    #     number: "{{ item.number }}"
+    #     part_start: "{{ item.part_start }}"
+    #     part_end: "{{ item.part_end }}"
+    #     state: present
+    #   with_items:
+    #     - number: 1
+    #       part_start: 0%
+    #       part_end: 20GiB
+    #     - number: 2
+    #       part_start: 20GiB
+    #       part_end: 45GiB
+    #   when:
+    #     - ansible_devices.sdb is defined
