@@ -13,3 +13,20 @@
 
     - name: pv
       ansible.builtin.command: pvresize /dev/sda2
+
+    # Block Volume size is 50GB in OCI
+    # => split Block Volume in partitions for ASM-Disks to safe storage
+    - name: Create a new ext4 primary partition
+      community.general.parted:
+        device: /dev/sdb
+        number: "{{ item.number }}"
+        part_end: "{{ item.size }}"
+        state: present
+        # fs_type: ext4
+      with_items:
+        - number: 1
+          size: 20GiB
+        - number: 2
+          size: 25GiB
+      when:
+        - ansible_devices.sdb is defined
