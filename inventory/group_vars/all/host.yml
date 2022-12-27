@@ -29,6 +29,7 @@ host_fs_layout:
     state: present
     filesystem:
       - {mntp: /, lvname: lv_root, lvsize: 40G, fstype: xfs}
+      - {mntp: swap, lvname: lv_swap2, lvsize: 16g, fstype: swap}
     disk:
       - {device: /dev/sda, pvname: /dev/sda2}
   # - vgname: vgora
