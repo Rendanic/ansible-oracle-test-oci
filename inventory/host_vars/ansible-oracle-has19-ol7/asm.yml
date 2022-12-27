@@ -4,7 +4,7 @@ oracle_home_gi: /u01/app/oracle/19/grid
 
 # oracle_install_image_gi: restart_home_19.15.zip
 
-apply_patches_gi: true
+apply_patches_gi: false
 gi_patches:
   "{{ gi_patches_config['19.16.0.0.220719'] }}"
 
