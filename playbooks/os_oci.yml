@@ -20,15 +20,15 @@
       community.general.parted:
         device: /dev/sdb
         number: "{{ item.number }}"
-        part_start: "{{ item.start }}"
-        part_end: "{{ item.size }}"
+        part_start: "{{ item.part_start }}"
+        part_end: "{{ item.part_end }}"
         state: present
       with_items:
         - number: 1
-          start: 0%
-          size: 20GiB
+          part_start: 0%
+          part_end: 20GiB
         - number: 2
-          start: 20GiB
-          size: 25GiB
+          part_start: 20GiB
+          part_end: 45GiB
       when:
         - ansible_devices.sdb is defined
