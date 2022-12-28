@@ -5,7 +5,7 @@ oracle_sw_unpack: false
 
 golden_image_dest: /u01/golden
 
-# usind NFS-Server
+# using NFS-Server
 install_from_nfs: true
 nfs_server_sw: 10.20.20.229
 nfs_server_sw_path: /sw/oracle
