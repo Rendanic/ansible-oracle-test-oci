@@ -2,6 +2,13 @@
 apply_patches_db: false
 db_homes_config:
 
+  db1917-gi-ee: &db1917-gi-ee
+    home: db1917-gi-ee
+    version: 19.3.0.0
+    oracle_home: /u01/app/oracle/product/19/db1917-gi-ee
+    edition: EE
+    opatch_minversion: 12.2.0.1.30
+
   db1915-si-ee: &db1915-si-ee
     home: db1915-si-ee
     version: 19.3.0.0
@@ -213,6 +220,11 @@ db_homes_config:
   # Current Mapping of ORACLE_HOMEs
   # use this mapping for fast change between the Release Updates
   # <<: * => merge values from alias and overwrite oracle_home + home
+  db19-gi-ee:
+    <<: *db1917-gi-ee
+    imagename: db_home_19.17.zip
+    oracle_home: /u01/app/oracle/product/19/db1
+    home: db19-gi-ee
   db19-si-ee:
     <<: *db1915-si-ee
     imagename: db_home_19.15.zip
