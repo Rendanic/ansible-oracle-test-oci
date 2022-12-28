@@ -230,7 +230,7 @@ db_homes_config:
   # <<: * => merge values from alias and overwrite oracle_home + home
   db19-gi-ee:
     <<: *db1917-gi-ee
-    imagename: db_home_19.17.zip
+    # imagename: db_home_19.17.zip
     oracle_home: /u01/app/oracle/product/19/db1
     home: db19-gi-ee
   db19-si-ee:
