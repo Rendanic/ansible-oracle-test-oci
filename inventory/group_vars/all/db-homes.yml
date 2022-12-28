@@ -8,6 +8,14 @@ db_homes_config:
     oracle_home: /u01/app/oracle/product/19/db1917-gi-ee
     edition: EE
     opatch_minversion: 12.2.0.1.30
+    opatchauto:
+      - patchid: 34416665
+        patchversion: 19.17.0.0.221018
+        state: present
+        path: ./19.17.0.0.221018/gi/34416665/34416665
+        subpatches:
+          - 34444834  # OCW Release Update 19.17.0.0.221018
+          - 34419443  # Database Release Update 19.17.0.0.221018
 
   db1915-si-ee: &db1915-si-ee
     home: db1915-si-ee

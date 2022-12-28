@@ -14,5 +14,5 @@ oracle_pdbs:
 
 db_homes_installed:
   - home: db19-gi-ee
-    apply_patches: false
+    apply_patches: true
     state: present
