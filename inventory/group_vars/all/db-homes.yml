@@ -1,5 +1,5 @@
 ---
-apply_patches_db: false
+apply_patches_db: true
 db_homes_config:
 
   db1917-gi-ee: &db1917-gi-ee
