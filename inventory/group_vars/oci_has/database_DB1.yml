@@ -3,7 +3,7 @@
 # Don't forget to add the oracle_database_<name> to oracle_databases!
 #
 oracle_database_db1:
-  home: &db_config_home db19-si-ee
+  home: &db_config_home db19-gi-ee
   oracle_db_name: &oracle_db_name DB1
   oracle_db_type: SI                                   # Type of database (RAC,RACONENODE,SI)
   is_container: true
