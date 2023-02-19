@@ -8,4 +8,4 @@ collections:
   - name: https://github.com/Rendanic/ansible-oracle.git
     type: git
     version: prorahost
-    version: prtablespace
+    # version: prtablespace
